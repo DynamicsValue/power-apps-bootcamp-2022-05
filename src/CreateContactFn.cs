@@ -30,13 +30,19 @@ namespace DynamicsValue.AzFunctions
             firstName = firstName ?? data?.firstName;
             email = email ?? data?.email;
 
-            string responseMessage = string.IsNullOrEmpty(firstName)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {firstName}. This HTTP triggered function executed successfully.";
+            
+            var dataverseUrl = System.Environment.GetEnvironmentVariable("DataverseUrl");
+            var clientId = System.Environment.GetEnvironmentVariable("ClientId");
+            var clientSecret = System.Environment.GetEnvironmentVariable("ClientSecret");
 
+            var client = new ServiceClient(new System.Uri(dataverseUrl), clientId, clientSecret, false);
+            if(!client.IsReady)
+            {
+                return new ObjectResult("Couldn not connect to dataverse") { StatusCode = 401 };
+            }
 
-
-            return new OkObjectResult(responseMessage);
+            var result = await CreateContact(client, firstName, email);
+            return new OkObjectResult(JsonConvert.SerializeObject(result));
         }
 
         internal static async Task<GenericResult> CreateContact(IOrganizationServiceAsync2 service, string firstName, string email)
