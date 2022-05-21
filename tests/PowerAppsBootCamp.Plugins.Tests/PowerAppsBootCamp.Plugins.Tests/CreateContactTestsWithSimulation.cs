@@ -16,12 +16,12 @@ namespace PowerAppsBootCamp.Plugins.Tests
         [Fact]
         public async void Should_create_contact_with_pipeline()
         {
-            _context.RegisterPluginStep<FollowUpPlugin2, Contact>("Create", ProcessingStepStage.Postoperation, ProcessingStepMode.Synchronous);
+            _context.RegisterPluginStep<FollowUpPlugin, Contact>("Create", ProcessingStepStage.Preoperation, ProcessingStepMode.Synchronous);
 
             _service.Execute(new CreateRequest()
             {
                 Target =
-                new Entity("contact")
+                new Contact()
                 {
                     ["firstname"] = "Joe",
                     ["emailaddress1"] = "joe@satriani.com"
@@ -36,7 +36,6 @@ namespace PowerAppsBootCamp.Plugins.Tests
             Assert.Equal("joe@satriani.com", contacts[0]["emailaddress1"]);
 
 
-
             var pluginStepAudit = _context.GetPluginStepAudit();
             var stepsAudit = pluginStepAudit.CreateQuery().ToList();
             Assert.Single(stepsAudit);
@@ -44,7 +43,7 @@ namespace PowerAppsBootCamp.Plugins.Tests
             var auditedStep = stepsAudit[0];
 
             Assert.Equal("Create", auditedStep.MessageName);
-            Assert.Equal(typeof(FollowUpPlugin2), auditedStep.PluginAssemblyType);
+            Assert.Equal(typeof(FollowUpPlugin), auditedStep.PluginAssemblyType);
         }
 
         

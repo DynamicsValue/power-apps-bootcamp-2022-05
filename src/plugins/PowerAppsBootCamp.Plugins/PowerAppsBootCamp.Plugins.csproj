@@ -90,5 +90,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="..\..\shared\PowerAppsBootcamp.Shared\PowerAppsBootcamp.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\DataverseEntities\DataverseEntities.Shared\DataverseEntities.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

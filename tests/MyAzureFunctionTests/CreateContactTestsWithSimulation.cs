@@ -16,18 +16,15 @@ namespace MyAzureFunctionTests
         {
             _context.RegisterPluginStep<FollowUpPlugin>("Create", ProcessingStepStage.Postoperation, ProcessingStepMode.Synchronous, rank: 1, primaryEntityTypeCode: Contact.EntityTypeCode);
 
-            var result = CreateContactFn.CreateContactSync(_service, "Joe", "joe@satriani.com");
+            var result = await CreateContactFn.CreateContact(_service, "Joe", "joe@satriani.com");
             Assert.True(result.Succeeded);
             
             var contacts = _context.CreateQuery("contact").ToList(); 
             Assert.Single(contacts);
 
             
-
             Assert.Equal("Joe", contacts[0]["firstname"]);
             Assert.Equal("joe@satriani.com", contacts[0]["emailaddress1"]);
-
-
 
             var pluginStepAudit = _context.GetPluginStepAudit();
             var stepsAudit = pluginStepAudit.CreateQuery().ToList();

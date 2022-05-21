@@ -125,9 +125,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountNumberPluginTests.cs" />
     <Compile Include="CreateContactTestsWithSimulation.cs" />
     <Compile Include="FakeXrmEasyPipelineTestsBase.cs" />
-    <Compile Include="PluginsForTesting\FollowUpPlugin2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -137,7 +137,12 @@
   <ItemGroup>
     <Analyzer Include="..\..\..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
-  <Import Project="..\..\..\src\shared\PowerAppsBootcamp.Shared\PowerAppsBootcamp.Shared.projitems" Label="Shared" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\plugins\PowerAppsBootCamp.Plugins\PowerAppsBootCamp.Plugins.csproj">
+      <Project>{3c7be2d7-d88a-42a9-8d92-1c30ffba1592}</Project>
+      <Name>PowerAppsBootCamp.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

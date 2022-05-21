@@ -10,6 +10,7 @@ using Microsoft.PowerPlatform.Dataverse.Client;
 using System.Runtime.CompilerServices;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
+using DataverseEntities;
 
 [assembly: InternalsVisibleTo("MyAzureFunctionTests")]
 namespace DynamicsValue.AzFunctions
@@ -48,29 +49,13 @@ namespace DynamicsValue.AzFunctions
 
         internal static async Task<GenericResult> CreateContact(IOrganizationServiceAsync2 service, string firstName, string email)
         {
-            /*
-            await service.CreateAsync(new Entity("contact") 
+
+            await service.CreateAsync(new Contact()
             {
                 ["firstname"] = firstName,
                 ["emailaddress1"] = email
             });
-            */
 
-            //service.Create(new Entity("contact")
-            //{
-            //    ["firstname"] = firstName,
-            //    ["emailaddress1"] = email
-            //});
-
-            service.Execute(new CreateRequest()
-            {
-                Target =
-                new Entity("contact")
-                {
-                    ["firstname"] = firstName,
-                    ["emailaddress1"] = email
-                }
-            });
             return GenericResult.Succeed();
         }
 

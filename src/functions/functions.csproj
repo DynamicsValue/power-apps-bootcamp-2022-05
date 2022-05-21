@@ -16,4 +16,5 @@
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
+  <Import Project="..\DataverseEntities\DataverseEntities.Shared\DataverseEntities.Shared.projitems" Label="Shared" />
 </Project>

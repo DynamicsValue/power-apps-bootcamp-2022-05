@@ -5,7 +5,7 @@ using FakeXrmEasy.Middleware;
 using FakeXrmEasy.Middleware.Crud;
 using FakeXrmEasy.Middleware.Messages;
 using FakeXrmEasy.Middleware.Pipeline;
-using Microsoft.Xrm.Sdk;
+using Microsoft.PowerPlatform.Dataverse.Client;
 using System.Reflection;
 
 namespace MyAzureFunctionTests
@@ -13,7 +13,7 @@ namespace MyAzureFunctionTests
     public class FakeXrmEasyPipelineTestsBase
     {
         protected readonly IXrmFakedContext _context;
-        protected readonly IOrganizationService _service;
+        protected readonly IOrganizationServiceAsync2 _service;
 
         public FakeXrmEasyPipelineTestsBase() 
         {
@@ -33,7 +33,7 @@ namespace MyAzureFunctionTests
                             .SetLicense(FakeXrmEasyLicense.RPL_1_5)
                             .Build();
 
-            _service = _context.GetOrganizationService();
+            _service = _context.GetAsyncOrganizationService2();
         }
     }
 }
