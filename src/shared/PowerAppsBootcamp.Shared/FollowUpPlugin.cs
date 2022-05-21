@@ -32,7 +32,7 @@ namespace PowerAppsBootcamp.Plugins
 
                 // Verify that the target entity represents an account.
                 // If not, this plug-in was not registered correctly.
-                if (entity.LogicalName != "account")
+                if (entity.LogicalName != "contact")
                     return;
 
                 try
@@ -47,11 +47,11 @@ namespace PowerAppsBootcamp.Plugins
                     followup["scheduledend"] = DateTime.Now.AddDays(7);
                     followup["category"] = context.PrimaryEntityName;
 
-                    // Refer to the account in the task activity.
+                    // Refer to the contact in the task activity.
                     if (context.OutputParameters.Contains("id"))
                     {
                         Guid regardingobjectid = new Guid(context.OutputParameters["id"].ToString());
-                        string regardingobjectidType = "account";
+                        string regardingobjectidType = "contact";
 
                         followup["regardingobjectid"] =
                         new EntityReference(regardingobjectidType, regardingobjectid);
@@ -70,7 +70,7 @@ namespace PowerAppsBootcamp.Plugins
                 //<snippetFollowupPlugin3>
                 catch (FaultException<OrganizationServiceFault> ex)
                 {
-                    throw new InvalidPluginExecutionException("An error occurred in the FollupupPlugin plug-in.", ex);
+                    throw new InvalidPluginExecutionException("An error occurred in the FollowUpPlugin plug-in.", ex);
                 }
                 //</snippetFollowupPlugin3>
                 catch (Exception ex)
