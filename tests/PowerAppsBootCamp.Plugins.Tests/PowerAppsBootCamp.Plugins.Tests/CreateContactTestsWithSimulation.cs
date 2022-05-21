@@ -1,0 +1,52 @@
+using System.Linq;
+using DataverseEntities;
+using FakeXrmEasy.Abstractions.Plugins.Enums;
+using FakeXrmEasy.Pipeline;
+using FakeXrmEasy.Plugins.Audit;
+using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Messages;
+using PowerAppsBootcamp.Plugins;
+using PowerAppsBootCamp.Plugins.Tests;
+using Xunit;
+
+namespace PowerAppsBootCamp.Plugins.Tests
+{
+    public class CreateContactTestsWithSimulation : FakeXrmEasyPipelineTestsBase
+    {
+        [Fact]
+        public async void Should_create_contact_with_pipeline()
+        {
+            _context.RegisterPluginStep<FollowUpPlugin2, Contact>("Create", ProcessingStepStage.Postoperation, ProcessingStepMode.Synchronous);
+
+            _service.Execute(new CreateRequest()
+            {
+                Target =
+                new Entity("contact")
+                {
+                    ["firstname"] = "Joe",
+                    ["emailaddress1"] = "joe@satriani.com"
+                }
+            });
+
+    
+            var contacts = _context.CreateQuery("contact").ToList(); 
+            Assert.Single(contacts);
+
+            Assert.Equal("Joe", contacts[0]["firstname"]);
+            Assert.Equal("joe@satriani.com", contacts[0]["emailaddress1"]);
+
+
+
+            var pluginStepAudit = _context.GetPluginStepAudit();
+            var stepsAudit = pluginStepAudit.CreateQuery().ToList();
+            Assert.Single(stepsAudit);
+
+            var auditedStep = stepsAudit[0];
+
+            Assert.Equal("Create", auditedStep.MessageName);
+            Assert.Equal(typeof(FollowUpPlugin2), auditedStep.PluginAssemblyType);
+        }
+
+        
+    }
+}
