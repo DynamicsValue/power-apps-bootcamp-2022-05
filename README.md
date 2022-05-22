@@ -5,5 +5,10 @@ Slides can be found in the slides/ folder at the root.
 
 
 - Use functions branch for a sample with Azure functions
+
+   tests/MyAzureFunctionTests/CreateContactTestsWithSimulation.cs
+
 - Use pipeline branch with a sample of Azure Function + Plugin Unit tests + Az Function with Pipeline Simulationa and Plugin Unit Tests.
+
+    tests/MyAzureFunctionTests/CreateContactTestsWithSimulation.cs
 
