@@ -17,7 +17,7 @@ In the demo we approached unit testing such scenario as follows:
 - 2) A unit test to verify the plugin creates a follow up task given a Create message with an OutputParameter (the resulting from the Create operation) was received
 - 3) A pipeline simulation scenario that wires everything together In-Memory, to check that both the contact and the task are created (this is experimental stuff, because really, the target versions of the client (.net core 3.1) and the server (net462) are different in production, but eventually....)
 
-## 1st part of Scenario : Azure Functions + Dataverse
+## Building and testing
 
 Use **functions branch** to find out a sample unit test of an Azure Function against Dataverse that will create a contact in .net core and using the Dataverse Service Client NuGet package. Use this branch so you can build the project in a Linux distro / Mac
 
