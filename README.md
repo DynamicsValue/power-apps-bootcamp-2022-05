@@ -23,12 +23,12 @@ Use **functions branch** to find out a sample unit test of an Azure Function aga
 
     tests/MyAzureFunctionTests/CreateContactTests.cs
 
-Please Use **pipeline branch** to find of the plugin unit test here:
+Please Use **pipeline branch** to find a sample of the plugin unit test here:
 
     tests/PowerAppsBootCamp.Plugins.Tests/PowerAppsBootCamp.Plugins.Tests/FollowUpPluginTests.cs
 
 
-Please also use **pipeline branch**pipeline branch to find a sample that will trigger a FollowUp plugin on Create of a contact from the same Azure function, and that you can step through it in the debugger (experimental)
+Please also use **pipeline branch** to check a sample that will trigger a FollowUp plugin on Create of a contact from the same Azure function, and that you can step through it in the debugger (experimental)
 
     tests/MyAzureFunctionTests/CreateContactTestsWithSimulation.cs
 
