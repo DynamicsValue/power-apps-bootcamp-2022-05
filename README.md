@@ -32,3 +32,8 @@ Please also use **pipeline branch** to check a sample that will trigger a Follow
 
     tests/MyAzureFunctionTests/CreateContactTestsWithSimulation.cs
 
+# Release notes
+
+Check out the latest release notes for this release:
+
+https://dynamicsvalue.github.io/fake-xrm-easy-docs/releases/2x/2.1.0/
